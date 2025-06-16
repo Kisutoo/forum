@@ -1,11 +1,20 @@
 <?php
-    $category = $result["data"]['category']; 
+    $user = $result["data"]['user']; 
     $topics = $result["data"]['topics']; 
 ?>
 
-<h1>Liste des topics</h1>
-
+<div class="topics">
 <?php
-foreach($topics as $topic ){ ?>
-    <p><a href="#"><?= $topic ?></a> par <?= $topic->getUser() ?></p>
-<?php }
+    $i = 0;
+    foreach($topics as $topic ){ ?>
+        <a href="#" class="l<?= $i ?>"><?= $topic ?><br><p> by <?= $topic->getUser() ?></p></a>
+   <?php $i++; 
+    } ?>
+</div>
+
+
+
+<?php 
+$titre = "Topics";
+$titre_secondaire = "Liste des Topics";
+?>
