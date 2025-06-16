@@ -30,10 +30,9 @@ h1{
 
 .topics{  
     display: grid;
-    grid-template-columns: repeat(2, 60em);
-    justify-content: center;
-    align-items: center;
+    grid-template-columns: repeat(2, 50em);
     margin-top: 4em;
+    width: 100%;
     a{
         font-size: 2em;
         width: max-content;
@@ -58,12 +57,12 @@ h1{
     a:hover{
         background-color: rgba(87, 17, 75, 0.3);
     }
+    a.l1{
+        justify-content: center;
+        text-align: center;
+    }
 }
 
-.categories{
-    display: flex;
-    flex-direction: column;
-}
 
 /* .topics p:nth-child(3n) {
     margin-right: 20em;
