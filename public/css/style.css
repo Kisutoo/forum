@@ -9,6 +9,7 @@ nav{
     display: flex;
     justify-content: space-between;
     text-align: center;
+    margin: 2em 2em;
 }
 body{
     background-image: url(../img/fond1.jpg);
@@ -27,12 +28,11 @@ h1{
     text-align: center;
 }
 
-.topics{
-    align-items: center;
+.topics{  
     display: grid;
     grid-template-columns: repeat(2, 60em);
     justify-content: center;
-
+    align-items: center;
     margin-top: 4em;
     a{
         font-size: 2em;
@@ -58,6 +58,11 @@ h1{
     a:hover{
         background-color: rgba(87, 17, 75, 0.3);
     }
+}
+
+.categories{
+    display: flex;
+    flex-direction: column;
 }
 
 /* .topics p:nth-child(3n) {

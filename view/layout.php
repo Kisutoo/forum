@@ -14,6 +14,7 @@
         <nav>
             <a href="index.php">Accueil</a>
             <a href="index.php?ctrl=forum&action=listTopics">ListTopics</a>
+            <a href="index.php?ctrl=forum&action=listCategories">listCategories</a>
             <div>
                 <a href="index.php?ctrl=security&action=login">Se connecter</a>
                 <a href="index.php?ctrl=security&action=register">S'inscrire</a>
