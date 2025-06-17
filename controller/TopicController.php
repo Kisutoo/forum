@@ -22,6 +22,8 @@ class TopicController extends AbstractController implements ControllerInterface{
         return [
             "view" => VIEW_DIR."forum/listTopics.php",
             "meta_description" => "Liste des topics du forum",
+            "titre" => "Topics",
+            "titre_secondaire" => "Liste des Topics",
             "data" => [
                 "user" => $user,
                 "topics" => $topics
@@ -42,6 +44,8 @@ class TopicController extends AbstractController implements ControllerInterface{
         return [
             "view" => VIEW_DIR."forum/listTopicsByCategorie.php",
             "meta_description" => "Liste des topics par catégorie : ".$categorie->getNomCategorie(),
+            "titre" => $categorie->getNomCategorie(),
+            "titre_secondaire" => $categorie->getNomCategorie(),
             "data" => [
                 "user" => $user,
                 "topics" => $topics,
@@ -56,12 +60,14 @@ class TopicController extends AbstractController implements ControllerInterface{
         $userManager = new UserManager();
         $postManager = new PostManager();
 
-        $posts = $postManager->findPostsByTopics($id);
+        $posts = $postManager->findPostsByTopic($id);
         $topic = $topicManager->findOneById($id);
 
         return [
             "view" => VIEW_DIR . "forum/detailTopic.php",
             "meta_description" => "Détail du post : " . $topic->getTitle(),
+            "titre" => $topic->getTitle(),
+            "titre_secondaire" => $topic->getTitle(),
             "data" => [
                 "posts" => $posts,
                 "topic" => $topic

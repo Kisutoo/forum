@@ -13,6 +13,8 @@ class HomeController extends AbstractController implements ControllerInterface {
     public function index(){
         return [
             "view" => VIEW_DIR."home.php",
+            "titre" => "Accueil",
+            "titre_secondaire" => "BIENVENUE SUR LE FORUM",
             "meta_description" => "Page d'accueil du forum"
         ];
     }

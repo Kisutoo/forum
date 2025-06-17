@@ -12,8 +12,3 @@
 <?php } ?>
 
 </div>
-
-<?php 
-$titre = $categorie->getNomCategorie();
-$titre_secondaire = $categorie->getNomCategorie();
-?>

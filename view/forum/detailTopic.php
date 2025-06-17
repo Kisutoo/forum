@@ -10,8 +10,3 @@
     </div>
 <?php } ?>
 </div>
-<?php
-$titre = $topic->getTitle();
-$titre_secondaire = $topic->getTitle();
-?>
-

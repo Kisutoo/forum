@@ -28,9 +28,13 @@ class ForumController extends AbstractController implements ControllerInterface{
         return [
             "view" => VIEW_DIR."forum/listCategories.php",
             "meta_description" => "Liste des catégories du forum",
+            "titre" => "Liste des catégories",
+            "titre_secondaire" => "Liste des catégories",
             "data" => [
                 "categories" => $categories
             ]
         ];
     }
+
+    // addCategory
 }

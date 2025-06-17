@@ -57,6 +57,8 @@ else{
     ob_start();//démarre un buffer (tampon de sortie)
     $meta_description = $result['meta_description'];
     /* la vue s'insère dans le buffer qui devra être vidé au milieu du layout */
+    $titre = $result['titre'];
+    $titre_secondaire = $result['titre_secondaire'];
     include($result['view']);
     /* je place cet affichage dans une variable */
     $page = ob_get_contents();

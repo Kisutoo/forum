@@ -5,13 +5,6 @@
 
 <div class="topics">
 <?php foreach($topics as $topic ){ ?>
-        <a href="#"><?= $topic ?><br><p> by <?= $topic->getUser() ?></p></a>
+    <a href="index.php?ctrl=topic&action=detailTopic&id=<?=$topic->getId()?>"><?= $topic ?><br><p> by <?= $topic->getUser() ?></p></a>
    <?php } ?>
 </div>
-
-
-
-<?php 
-$titre = "Topics";
-$titre_secondaire = "Liste des Topics";
-?>
