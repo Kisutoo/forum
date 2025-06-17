@@ -7,13 +7,14 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Kavivanar&display=swap" rel="stylesheet">
+    <meta name="description" content="<?= $meta_description ?>">
     <title><?=$titre?></title>
 </head>
 <body>
     <header>
         <nav>
             <a href="index.php">Accueil</a>
-            <a href="index.php?ctrl=forum&action=listTopics">ListTopics</a>
+            <a href="index.php?ctrl=topic&action=listTopics">ListTopics</a>
             <a href="index.php?ctrl=forum&action=listCategories">listCategories</a>
             <div>
                 <a href="index.php?ctrl=security&action=login">Se connecter</a>
@@ -25,6 +26,9 @@
         <h1><?= $titre_secondaire ?></h1>
         <?= $page ?>
     </main>
+    <footer>
+
+    </footer>
     
 </body>
 </html>

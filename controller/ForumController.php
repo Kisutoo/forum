@@ -7,6 +7,7 @@ use App\ControllerInterface;
 use Model\Managers\CategorieManager;
 use Model\Managers\TopicManager;
 use Model\Managers\UserManager;
+use Model\Managers\PostManager;
 
 class ForumController extends AbstractController implements ControllerInterface{
 
@@ -29,41 +30,6 @@ class ForumController extends AbstractController implements ControllerInterface{
             "meta_description" => "Liste des catégories du forum",
             "data" => [
                 "categories" => $categories
-            ]
-        ];
-    }
-
-    public function listTopics() {
-
-        $topicManager = new TopicManager();
-        $userManager = new UserManager();
-
-        $topics = $topicManager->findAll(["title", "ASC"]);
-        $user = $userManager->findAll(["nickName", "ASC"]);
-
-        return [
-            "view" => VIEW_DIR."forum/listTopics.php",
-            "meta_description" => "Liste des topics du forum",
-            "data" => [
-                "user" => $user,
-                "topics" => $topics
-            ]
-        ];
-    }
-
-    public function listTopicsByCategorie($id) {
-
-        $topicManager = new TopicManager();
-        $categorieManager = new CategorieManager();
-        $categorie = $categorieManager->findOneById($id);
-        $topics = $topicManager->findTopicsByCategorie($id);
-
-        return [
-            "view" => VIEW_DIR."forum/listTopics.php",
-            "meta_description" => "Liste des topics par catégorie : ".$categorie,
-            "data" => [
-                "categorie" => $categorie,
-                "sujet" => $topics
             ]
         ];
     }

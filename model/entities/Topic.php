@@ -14,7 +14,7 @@ final class Topic extends Entity{
     private $user;
     private $categorie;
     private $creationDate;
-    private $closed;
+    // private $closed;
 
     public function __construct($data){         
         $this->hydrate($data);        
@@ -54,13 +54,25 @@ final class Topic extends Entity{
         return $this;
     }
 
-    /**
-     * Get the value of user
-     */ 
-    public function getUser(){
-        return $this->user;
+    
+    public function setCreationDate($creationDate){
+        $this->creationDate = $creationDate;
+        return $this;
     }
-
+    
+    public function getCreationDate(){
+        return $this->creationDate;
+    }
+    
+    public function setCategorie($categorie){
+        $this->categorie = $categorie;
+        return $this;
+    }
+    
+    public function getCategorie(){
+        return $this->categorie;
+    }
+    
     /**
      * Set the value of user
      *
@@ -70,7 +82,13 @@ final class Topic extends Entity{
         $this->user = $user;
         return $this;
     }
-
+    /**
+     * Get the value of user
+     */ 
+    public function getUser(){
+        return $this->user;
+    }
+    
     public function __toString(){
         return $this->title;
     }

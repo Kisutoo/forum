@@ -8,7 +8,7 @@ class TopicManager extends Manager{
 
     // on indique la classe POO et la table correspondante en BDD pour le manager concerné
     protected $className = "Model\Entities\Topic";
-    protected $tableName = "sujet";
+    protected $tableName = "topic";
 
     public function __construct(){
         parent::connect();

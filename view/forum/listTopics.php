@@ -4,12 +4,9 @@
 ?>
 
 <div class="topics">
-<?php
-    $i = 0;
-    foreach($topics as $topic ){ ?>
-        <a href="#" class="l<?= $i ?>"><?= $topic ?><br><p> by <?= $topic->getUser() ?></p></a>
-   <?php $i++; 
-    } ?>
+<?php foreach($topics as $topic ){ ?>
+        <a href="#"><?= $topic ?><br><p> by <?= $topic->getUser() ?></p></a>
+   <?php } ?>
 </div>
 
 
