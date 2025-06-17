@@ -36,5 +36,25 @@ class ForumController extends AbstractController implements ControllerInterface{
         ];
     }
 
+    public function addCategorieForm() {
+        return [
+            "view" => VIEW_DIR . "forum/addCategorieForm.php",
+            "meta_description" => "Page pour ajouter une catégorie au forum",
+            "titre" => "Ajouter une catégorie",
+            "titre_secondaire" => "Ajouter une catégorie",
+        ];
+    }
+
+    public function addCategorie() {
+        if(isset($_POST['submit']))
+        {
+            $nomCategorie = filter_input(INPUT_POST, "nomCategorie", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+            $categorieManager = new CategorieManager();
+
+            $categorie =
+        }
+    }
+
     // addCategory
 }
