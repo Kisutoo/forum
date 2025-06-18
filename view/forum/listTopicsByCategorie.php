@@ -12,3 +12,9 @@
 <?php } ?>
 
 </div>
+<div class="topics addCategorie">
+    <a class="" href="index.php?ctrl=topic&action=addTopicForm&id=<?= $categorie->getId() ?>">Ajouter un topic</a>
+</div>
+<div class="topics addCategorie">
+    <a class="" href="index.php?ctrl=forum&action=deleteCategorie&id=<?= $categorie->getId() ?>">Supprimer la catégorie</a>
+</div>

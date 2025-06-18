@@ -74,5 +74,48 @@ class TopicController extends AbstractController implements ControllerInterface{
             ]
         ];
     } 
+
+    public function addTopicForm($id) {
+        
+        $userManager = new UserManager();
+
+        $users = $userManager->findAll();
+        return [
+            "view" => VIEW_DIR . "forum/addTopicForm.php",
+            "meta_description" => "Page pour ajouter un topic à une catégorie",
+            "titre" => "Ajouter un topic",
+            "titre_secondaire" => "Ajouter un topic",
+            "data" => [
+                "users" => $users
+            ]
+        ];
+    }
+
+    public function addTopic($id) {
+        if(isset($_POST['submit']))
+        {
+            $title = filter_input(INPUT_POST, "title", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $userId = filter_input(INPUT_POST, "user_id", FILTER_VALIDATE_INT);
+
+            $topicManager = new TopicManager();
+
+            $topicArray = array (
+                "title" => $title,
+                "user_id" => $userId,
+                "categorie_id" => $id
+            );
+            $topics = $topicManager->add($topicArray);
+        }
+        $topicController = new TopicController();
+        $topicController->redirectTo("topic", "listTopicsByCategorie", $id);
+    }
+
+    public function deleteTopic($id) {
+        $topicManager = new TopicManager();
+        $topicController = new topicController();
+
+        $topic = $topicManager->delete($id);
+        $redirect = $topicController->redirectTo("topic", "listTopicByCategorie", "");
+    }
 }
 ?>

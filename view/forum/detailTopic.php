@@ -8,5 +8,8 @@
         <p><?= $post->getUser()->getNickName()?></p>
         <p><?= $post->getTexte() ?></p>
     </div>
+<div class="topics addCategorie">
+    <a class="" href="index.php?ctrl=topic&action=deleteTopic&id=<?= $topic->getId() ?>">Supprimer le topic</a>
+</div>
 <?php } ?>
 </div>

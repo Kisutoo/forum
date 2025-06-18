@@ -51,10 +51,20 @@ class ForumController extends AbstractController implements ControllerInterface{
             $nomCategorie = filter_input(INPUT_POST, "nomCategorie", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
             $categorieManager = new CategorieManager();
-
-            $categorie =
+            $categorieArray = array ("nomCategorie" => $nomCategorie);
+            $categorie = $categorieManager->add($categorieArray); 
+            
         }
+        $forumController = new ForumController();
+        $redirect = $forumController->redirectTo("forum", "listCategories");
     }
 
-    // addCategory
+    public function deleteCategorie($id) {
+        $categorieManager = new CategorieManager();
+        $forumController = new ForumController();
+
+        $categorie = $categorieManager->delete($id);
+        $redirect = $forumController->redirectTo("forum", "listCategories");
+
+    }
 }
