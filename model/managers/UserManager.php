@@ -14,5 +14,15 @@ class UserManager extends Manager{
         parent::connect();
     }
 
-    
+    public function checkUserByMail($mail)
+    {
+        $sql = "SELECT *
+                FROM ". $this->tableName. " t
+                WHERE t.mail = :mail";
+
+        return $this->getOneOrNullResult(
+            DAO::select($sql, ['mail' => $mail], false), 
+            $this->className
+        );
+    }
 }
