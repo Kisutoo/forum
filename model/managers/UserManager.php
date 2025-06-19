@@ -25,4 +25,16 @@ class UserManager extends Manager{
             $this->className
         );
     }
+
+    public function checkUserByNickName($nickName)
+    {
+        $sql = "SELECT *
+                FROM ". $this->tableName. " t
+                WHERE t.nickName = :nickName";
+
+        return $this->getOneOrNullResult(
+            DAO::select($sql, ['nickName' => $nickName], false), 
+            $this->className
+        );
+    }
 }

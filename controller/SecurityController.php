@@ -32,14 +32,22 @@ class SecurityController extends AbstractController{
             $nickName = filter_input(INPUT_POST, "pseudo", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $pass1 = filter_input(INPUT_POST, "password1", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $pass2 = filter_input(INPUT_POST, "password2", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            // On sanitize les champs rentrés
 
             if($mail && $nickName && $pass1 && $pass2)
             {
                 
-                $user = $userManager->checkUserByMail($mail);
-                if($user)
+                $userMail = $userManager->checkUserByMail($mail);
+                $userNickName = $userManager->checkUserByNickName($nickName);
+                if($userMail)
                 {
                     $securityController->redirectTo("security", "regiterPage");
+                    // Message d'erreur, mail déjà utilisé en base de donné puis redirection sur la page d'inscription
+                }
+                elseif($userNickName)
+                {
+                    $securityController->redirectTo("security", "regiterPage");
+                    // Message d'erreur, pseudo déjà utilisé en base de donné puis redirection sur la page d'inscription
                 }
                 else
                 {
@@ -68,6 +76,16 @@ class SecurityController extends AbstractController{
         {
             $securityController->redirectTo("security", "registerPage"); exit;
         }
+    }
+    
+    public function loginPage()
+    {
+        return [
+            "meta_description" => "Page de connexion du forum",
+            "titre" => "Se connecter",
+            "titre_secondaire" => "Connexion au forum",
+            "view" => VIEW_DIR."security/loginPage.php"
+        ];
     }
     public function login() {
 
