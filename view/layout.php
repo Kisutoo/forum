@@ -33,6 +33,11 @@
     </header>
     <main>
         <h1><?= $titre_secondaire ?></h1>
+        <?php if(isset($_SESSION["error"]))
+        { ?>
+            <h2><?= $_SESSION["error"] ?></h2>
+            <?php unset($_SESSION["error"]);
+        } ?>
         <?= $page ?>
     </main>
     <footer>

@@ -3,6 +3,7 @@ namespace Controller;
 
 use App\AbstractController;
 use App\ControllerInterface;
+use App\Session;
 use Model\Managers\CategorieManager;
 use Model\Managers\TopicManager;
 use Model\Managers\UserManager;
@@ -23,9 +24,10 @@ class SecurityController extends AbstractController{
     
     public function register() 
     {
-        $securityController = new SecurityController();
         $userManager = new UserManager();
+        $session = new Session();
         $password_regex = "^\S*(?=\S{8,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\W])(?=\S*[\d])\S*$^";
+        // Avec cette chaine de caractère que l'on va donner à la fonction preg_match, on va vérifié que le mot de passe est bien aux normes (1 maj, 1 min etc)
         if(isset($_POST["submit"]))
         {
             $mail = filter_input(INPUT_POST, "mail", FILTER_SANITIZE_FULL_SPECIAL_CHARS, FILTER_VALIDATE_EMAIL);
@@ -35,18 +37,26 @@ class SecurityController extends AbstractController{
             // On sanitize les champs rentrés
 
             if($mail && $nickName && $pass1 && $pass2)
+            // Si les variables existent après avoir été sanitize
             {
                 
                 $userMail = $userManager->checkUserByMail($mail);
+                // On vérifie si le mail rentré est déjà en base de donnée, renvoie NULL si ce n'est pas le cas
                 $userNickName = $userManager->checkUserByNickName($nickName);
+                // On vérifie si le pseudo rentré est déjà en base de donnée renvoie NULL si ce n'est pas le cas
                 if($userMail)
                 {
-                    $securityController->redirectTo("security", "regiterPage");
+                    // addFlash("Adresse mail déjà utilisée !");
+                    $session->getFlash("error");
+                    $this->redirectTo("security", "registerPage"); exit;
                     // Message d'erreur, mail déjà utilisé en base de donné puis redirection sur la page d'inscription
                 }
                 elseif($userNickName)
                 {
-                    $securityController->redirectTo("security", "regiterPage");
+                    $session->addFlash("error", "Pseudonyme déjà utilisé, veuillez en choisir un autre");
+                    $this->redirectTo("security", "registerPage"); 
+                    $session->getFlash("error");
+                    exit;
                     // Message d'erreur, pseudo déjà utilisé en base de donné puis redirection sur la page d'inscription
                 }
                 else
@@ -59,22 +69,25 @@ class SecurityController extends AbstractController{
                             "motDePasse" => password_hash($pass1, PASSWORD_DEFAULT)
                         ];
                         $userManager->add($userArray);
-                        $securityController->redirectTo("security", "loginPage"); exit;
+                        $this->redirectTo("security", "loginPage"); exit;
                     }
                     else
-                    {
-                        $securityController->redirectTo("security", "registerPage"); exit;
+                    {   
+                        $session->getFlash("error");
+                        $this->redirectTo("security", "registerPage"); exit;
                     }
                 }
             }
             else
             {
-                $securityController->redirectTo("security", "registerPage"); exit;
+                $session->getFlash("error");
+                $this->redirectTo("security", "registerPage"); exit;
             }
         }
         else
         {
-            $securityController->redirectTo("security", "registerPage"); exit;
+            $session->getFlash("error");
+            $this->redirectTo("security", "registerPage"); exit;
         }
     }
     
