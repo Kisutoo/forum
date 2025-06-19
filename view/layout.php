@@ -17,8 +17,17 @@
             <a href="index.php?ctrl=topic&action=listTopics">ListTopics</a>
             <a href="index.php?ctrl=forum&action=listCategories">listCategories</a>
             <div>
-                <a href="index.php?ctrl=security&action=login">Se connecter</a>
-                <a href="index.php?ctrl=security&action=register">S'inscrire</a>
+         <?php if(isset($_SESSION["user"]))
+               { ?>
+                    <a href="index.php?ctrl=security&action=profile">Mon profil</a>
+                    <a href="index.php?ctrl=security&action=logout">Se déconnecter</a> 
+         <?php } 
+                else
+                { ?>
+                    <a href="index.php?ctrl=security&action=loginPage">Se connecter</a>
+                    <a href="index.php?ctrl=security&action=registerPage">S'inscrire</a> 
+         <?php  } ?>
+
             </div>
         </nav>
     </header>

@@ -6,11 +6,12 @@
 ?>
 
 <div class="topics">
-
-<?php foreach($topics as $topic ){ ?>
-        <a href="index.php?ctrl=topic&action=detailTopic&id=<?=$topic->getId()?>"><?= $topic ?><br><p> by <?= $topic->getUser() ?></p></a>
-<?php } ?>
-
+   <?php if($topics)
+   {
+     foreach($topics as $topic ){ ?>
+            <a href="index.php?ctrl=topic&action=detailTopic&id=<?=$topic->getId()?>"><?= $topic ?><br><p> by <?= $topic->getUser() ?></p></a>
+    <?php } 
+    }?>
 </div>
 <div class="topics addCategorie">
     <a class="" href="index.php?ctrl=topic&action=addTopicForm&id=<?= $categorie->getId() ?>">Ajouter un topic</a>

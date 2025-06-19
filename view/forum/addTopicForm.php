@@ -10,16 +10,6 @@ $users = $result["data"]["users"];
         </label>
         <input type="text" class="inputForm" required="required" name="title">
     </div>
-    <div class="section">
-        <label class="labelCategorie" aria-label="Créateur du topic">
-            Créateur du topic
-        </label>
-        <select type="select" class="inputForm" required="required" name="user_id">
-            <?php foreach($users as $user) { ?>
-                    <option value="<?= $user->getId() ?>"><?= $user ?></option>
-            <?php  } ?>
-        </select>
-    </div>
     <div class="bouton">
         <input class="envoyer" type="submit" name="submit" value="Ajouter le topic">
     </div>

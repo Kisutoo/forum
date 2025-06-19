@@ -64,11 +64,19 @@ h1{
 .addCategorie{
     display: flex;
 }
-
-/* .topics p:nth-child(3n) {
-    margin-right: 20em;
+.contentForm{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40em;
 }
- */
+
+.registerForm{
+    display: flex;
+    flex-direction: column;
+}
+
 
 
 

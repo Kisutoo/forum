@@ -95,13 +95,13 @@ class TopicController extends AbstractController implements ControllerInterface{
         if(isset($_POST['submit']))
         {
             $title = filter_input(INPUT_POST, "title", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-            $userId = filter_input(INPUT_POST, "user_id", FILTER_VALIDATE_INT);
+            // $userId = filter_input(INPUT_POST, "user_id", FILTER_VALIDATE_INT);
 
             $topicManager = new TopicManager();
 
             $topicArray = array (
                 "title" => $title,
-                "user_id" => $userId,
+                "user_id" => 1,
                 "categorie_id" => $id
             );
             $topics = $topicManager->add($topicArray);
