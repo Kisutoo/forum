@@ -168,9 +168,10 @@ class SecurityController extends AbstractController{
     
     public function logout() 
     {
-        $session = new Session();
-        unset($session->getUser());
+        unset($_SESSION["user"]);
+        // On supprime le tableau de session qui contient l'utilisateur que l'on a rentré précédemment dans la fonction login grace à la fonction "setUser" de la class Session
         $this->redirectTo("home", "index"); exit;
+        // Redirection vers la page d'accueil
     }
 }
 
