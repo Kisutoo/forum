@@ -11,6 +11,11 @@ final class User extends Entity{
 
     private $id;
     private $nickName;
+    private $mail;
+    private $motDePasse;
+    private $dateDInscription;
+    private $photoDeProfil;
+    private $role;
 
     public function __construct($data){         
         $this->hydrate($data);        
@@ -54,4 +59,60 @@ final class User extends Entity{
     public function __toString() {
         return $this->nickName;
     }
+
+    public function getMail()
+    {
+        return $this->mail;
+    }
+
+    public function setMail($mail)
+    {
+        $this->mail = $mail;
+        return $this->mail;
+    }
+
+    public function getMotDePasse()
+    {
+        return $this->motDePasse;
+    }
+
+    public function setMotDePasse($motDePasse)
+    {
+        $this->motDePasse = $motDePasse;
+        return $this->motDePasse;
+    }
+
+    public function getDateDInscription()
+    {
+        return $this->dateDInscription;
+    }
+
+    public function setDateDInscription($dateDInscription)
+    {
+        $this->dateDInscription = $dateDInscription;
+        return $this->dateDInscription;
+    }
+
+    public function getPhotoDeProfil()
+    {
+        return $this->photoDeProfil;
+    }
+
+    public function setPhotoDeProfil($photoDeProfil)
+    {
+        $this->photoDeProfil = $photoDeProfil;
+        return $this->photoDeProfil;
+    }
+
+    public function getRole()
+    {
+        return $this->role;
+    }
+
+    public function setRole($role)
+    {
+        $this->role = $role;
+        return $this->role;
+    }
+
 }

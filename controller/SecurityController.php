@@ -113,11 +113,64 @@ class SecurityController extends AbstractController{
             "view" => VIEW_DIR."security/loginPage.php"
         ];
     }
-    public function login() {
+    
+    public function login() 
+    {
+        $userManager = new UserManager();
+        $session = new Session();
+        if(isset($_POST["submit"]))
+        {
+            $mail = filter_input(INPUT_POST, "mail", FILTER_SANITIZE_FULL_SPECIAL_CHARS, FILTER_VALIDATE_EMAIL);
+            $password = filter_input(INPUT_POST, "password", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            // On sanitize les champs rentrés dans le formulaire
 
+            if($mail && $password)
+            {
+                $user = $userManager->checkUserByMail($mail);
+                // Si l'utilisateur existe en base de donné (vérification via le mail)
+                if($user)
+                // Si l'utilisateur existe
+                {
+                    $hash = $user->getMotDePasse();
+                    // On récupère son mot de passe hashé en base de donné
+                    if(password_verify($password, $hash) == true)
+                    // Si le mot de passe rentré en formulaire, correspond au mot de passe haché de la base de donné (vérification faire grace à password_verify)
+                    {
+                        $session->setUser($user);
+                        // On rentre l'utilisateur dans le tableau de session avec ses information (pseudo, mail, photo de profil etc)
+                        $this->redirectTo("home", "index");
+                    }
+                    else
+                    {
+                        $session->addFlash("error", "Mail ou mot de passe incorrect");
+                        $this->redirectTo("security", "loginPage"); exit;
+                        //Message d'erreur + redirection si on ne trouve pas de mail ou si le mot de passe saisi n'est pas le bon
+                    }
+                }
+                else
+                {
+                    $session->addFlash("error", "Mail ou mot de passe incorrect");
+                    $this->redirectTo("security", "loginPage"); exit;
+                    //Message d'erreur + redirection si on ne trouve pas de mail ou si le mot de passe saisi n'est pas le bon
+                }
+            }
+            else
+            {
+                $session->addFlash("error", "Veuillez saisir des information correctes");
+                $this->redirectTo("security", "loginPage"); exit;
+            }
+        }
+        else
+        {
+            $this->redirectTo("security", "loginPage"); exit;
+        }
     }
-    public function logout() {
-        
+    
+    public function logout() 
+    {
+        $session = new Session();
+        unset($session->getUser());
+        $this->redirectTo("home", "index"); exit;
     }
 }
 
@@ -129,4 +182,4 @@ class SecurityController extends AbstractController{
 // Pourquoi utiliser un algorithme fort : Certains algorithmes sont réputés fort cas il n'existe à ce jour pas encore de dictionnaire repertoriant toutes les possibilités d'empreinte numériques, ce qui rend les attaques bruteforce beaucoup plus difficile
 // définir empreinte numérique : le résultat obtenu via un algorithme de hash, chaine de caractères avec cost, sel, hash
 // Le sel sert à lutter contre les attaques par analyse fréquentielle, les attaques utilisant des rainbow tables, les attaques par dictionnaire et les attaques par force brute en ajoutant des données aléatoires aux mots de passe avant le hachage
-
+?>

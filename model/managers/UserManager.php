@@ -37,4 +37,16 @@ class UserManager extends Manager{
             $this->className
         );
     }
+
+    public function getPasswordByMail($mail)
+    {
+        $sql = "SELECT motDePasse
+                FROM ". $this->tableName. " t
+                WHERE t.mail = :mail";
+
+        return $this->getOneOrNullResult(
+            DAO::select($sql, ['mail' => $mail], false), 
+            $this->className
+        );
+    }
 }
