@@ -47,46 +47,59 @@ class SecurityController extends AbstractController{
                 if($userMail)
                 {
                     // addFlash("Adresse mail déjà utilisée !");
-                    $session->getFlash("error");
+                    $session->addFlash("error", "Adresse mail déjà utilisée veuillez en choisir une autre");
                     $this->redirectTo("security", "registerPage"); exit;
                     // Message d'erreur, mail déjà utilisé en base de donné puis redirection sur la page d'inscription
                 }
                 elseif($userNickName)
                 {
                     $session->addFlash("error", "Pseudonyme déjà utilisé, veuillez en choisir un autre");
-                    $this->redirectTo("security", "registerPage"); 
-                    $session->getFlash("error");
-                    exit;
+                    $this->redirectTo("security", "registerPage"); exit;
                     // Message d'erreur, pseudo déjà utilisé en base de donné puis redirection sur la page d'inscription
                 }
                 else
                 {
-                    if($pass1 = $pass2 && preg_match($password_regex, $pass1) == 1)
+                    if($pass1 == $pass2 && preg_match($password_regex, $pass1) == 1)
+                    // On vérifie si le mot de passe saisi est équivalent au champ pour confirmer celui ci et si il respecte bien la regex(règles de mots de passe)
+                    // Si oui, on rentre les infos saisies dans un tableau associatif dans le but de l'ajouter à la base de donnée
                     {
                         $userArray = [
                             "mail" => $mail,
                             "nickName" => $nickName,
                             "motDePasse" => password_hash($pass1, PASSWORD_DEFAULT)
+                            // On hash le mot de passe pour ne passe qu'on puisse le récupérer en clair dans la base de donnée
+
                         ];
+                        // Tableau associatif avec les informations de l'utilisateur saisies dans le formulaire
                         $userManager->add($userArray);
+                        // Ajout en base de donnée
                         $this->redirectTo("security", "loginPage"); exit;
+                        // Redirection vers la page de connection si tout s'est bien passé
+                    }
+                    if($pass1 != $pass2 && preg_match($password_regex, $pass1) == 1)
+                    // Si le mot de passe et la confirmation de celui ci ne sont pas équivalents, on affiche un message d'erreur puis on redirige l'utilisateur vers la page d'inscription
+                    {   
+                        $session->addFlash("error", "Les deux mots de passe saisis ne sont pas équivalents");
+                        $this->redirectTo("security", "registerPage"); exit;
                     }
                     else
-                    {   
-                        $session->getFlash("error");
+                    // Si le mot de passe saisi ne respecte pas la regex ...
+                    {
+                        $session->addFlash("error", "Le mot de passe saisi ne respecte pas les normes de mot de passe");
                         $this->redirectTo("security", "registerPage"); exit;
                     }
                 }
             }
             else
+            // Si après avoir été filtré dans les champs d'inscription, toutes les variables n'ont pas pu avoir de valeurs 
             {
-                $session->getFlash("error");
+                $session->addFlash("error", "Veuillez saisir des valeurs correctes");
                 $this->redirectTo("security", "registerPage"); exit;
             }
         }
         else
+        // Si on accède à cette fonction via l'url sans appuyer sur le bouton submit ou valider le formulaire
         {
-            $session->getFlash("error");
             $this->redirectTo("security", "registerPage"); exit;
         }
     }
@@ -107,3 +120,13 @@ class SecurityController extends AbstractController{
         
     }
 }
+
+// définir hasher, et la différence entre hasher, encoder et chiffrer + cas d'utilisation
+
+    // Hasher : Sens unique/irreversible ,  consiste à convertir les mots de passe en une chaîne alphanumérique à l’aide d’algorithmes (ne pas stocker les information sensibles en clair dans la base de donnée, dans le cas ou l'on venait à se la faire pirater ou si celle ci fuitait)
+    // Chiffrer : Double sens/reversible ,  Converti également les mots de passe en chaine alphanumérique mais peu être retransformer en texte clair si on possède la clef de chiffrement (empecher le vol de données, la modification de celles ci ou empecher tout accès non autorisé si l'on possède pas la clef de chiffrement)
+    // Encoder : convertir des données dans un format déterminé (compression de donnée)
+// Pourquoi utiliser un algorithme fort : Certains algorithmes sont réputés fort cas il n'existe à ce jour pas encore de dictionnaire repertoriant toutes les possibilités d'empreinte numériques, ce qui rend les attaques bruteforce beaucoup plus difficile
+// définir empreinte numérique : le résultat obtenu via un algorithme de hash, chaine de caractères avec cost, sel, hash
+// Le sel sert à lutter contre les attaques par analyse fréquentielle, les attaques utilisant des rainbow tables, les attaques par dictionnaire et les attaques par force brute en ajoutant des données aléatoires aux mots de passe avant le hachage
+
