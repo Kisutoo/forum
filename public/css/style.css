@@ -107,10 +107,13 @@ h1{
 .allPosts{
     margin-top: 5em;
     min-height: 30em;
+    max-width: fit-content;
+    justify-content: center;
     display: flex;
     flex-direction: column;
     align-items: center;
     .message{
+        padding-top: 2em;
         text-align: center;
         display: flex;
         flex-direction: column;
@@ -123,10 +126,15 @@ h1{
     }
 }
 
-.message:nth-child(2){
+.allPostsContent{
+    display: flex;
+    justify-content: center;
+}
+
+.message:nth-child(even){
 
     .message{
-        margin-left: 10em;
+        margin-left: 15em;
     }
     .auteurPost{
         text-align: right;
