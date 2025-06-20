@@ -19,6 +19,7 @@ class SecurityController extends AbstractController{
             "titre" => "S'inscrire",
             "titre_secondaire" => "Inscription au forum",
             "view" => VIEW_DIR."security/registerPage.php"
+            // On définie des variable que l'on va réutiliser dans le template en passant par l'index, pour que l'affichage diffère en fonction des pages sur lesquels on navigue
         ];
     }
     
