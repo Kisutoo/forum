@@ -92,6 +92,7 @@ class TopicController extends AbstractController implements ControllerInterface{
     }
 
     public function addTopic($id) {
+        $this->restrictTo("membre");
         if(isset($_POST['submit']))
         {
             $title = filter_input(INPUT_POST, "title", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
@@ -116,6 +117,15 @@ class TopicController extends AbstractController implements ControllerInterface{
 
         $topic = $topicManager->delete($id);
         $redirect = $topicController->redirectTo("topic", "listTopicByCategorie", "");
+    }
+
+    public function addMessage()
+    {
+        if(isset($_POST["submit"]))
+        {
+            $texte = filter_input(INPUT_POST, "texte", FILTER_VALIDATE_FULL_SPECIAL_CHARS);
+
+        }
     }
 }
 ?>

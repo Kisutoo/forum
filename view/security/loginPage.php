@@ -1,11 +1,15 @@
 <div class="contentForm">
     <form class="registerForm" action="index.php?ctrl=security&action=login" method="POST">
-        <label for="mail" aria-label="Adresse mail">Mail</label>
-        <input class="inputForm" type="text" required="required" name="mail">
+        <div class="section">
+            <label for="mail" aria-label="Adresse mail">Mail</label>
+            <input class="inputForm" type="text" required="required" name="mail" placeholder="exemple@hotmail.com">
+        </div>
 
-        <label for="password" aria-label="Mot de passe">Mot de passe</label>
-        <input class="inputForm" type="text" required="required" name="password">
+        <div class="section">
+            <label for="password" aria-label="Mot de passe">Mot de passe</label>
+            <input class="inputForm" type="text" required="required" name="password" placeholder="*********">
+        </div>
 
-        <input type="submit" name="submit" value="Se connecter">
+        <input class="envoyer" type="submit" name="submit" value="Se connecter">
     </form>
 </div>

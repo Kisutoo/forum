@@ -104,7 +104,7 @@ final class User extends Entity{
         return $this->photoDeProfil;
     }
 
-    public function getRole()
+    public function hasRole()
     {
         return $this->role;
     }

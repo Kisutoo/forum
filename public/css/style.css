@@ -75,6 +75,18 @@ h1{
 .registerForm{
     display: flex;
     flex-direction: column;
+    align-items: center;
+    .section{
+        display: flex;
+        flex-direction: column;
+        margin: 1em 0;
+        input{
+            min-width: 40em;
+        }
+        input:placeholder-shown{
+            font-style: italic;
+        }
+    }
 }
 
 .error{
@@ -87,7 +99,69 @@ h1{
     font-weight: 400;
 }
 
+.navincription{
+    display: flex;
+    flex-direction: column;
+}
 
+.allPosts{
+    margin-top: 5em;
+    min-height: 30em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .message{
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        max-width: fit-content;
+        font-size: 2em;
+    }
+    .auteurPost{
+    text-align: left;
+    font-size: 1.5em;
+    }
+}
+
+.message:nth-child(2){
+
+    .message{
+        margin-left: 10em;
+    }
+    .auteurPost{
+        text-align: right;
+    }
+}
+
+.addMessageForm{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.envoyer{
+    padding: 0.5em 2em;
+    font-size: 1em;
+    margin-top: 3em;
+    border: none;
+    background-color: rgba(87, 17, 75, 0.1);
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 10px #ffffff;
+    backdrop-filter: blur(40px);
+    transition: background-color 0.5s ease-in-out;
+    
+}
+
+.envoyer:hover{
+    cursor: pointer;
+    background-color: rgba(87, 17, 75, 0.3);
+}
+
+
+.addMessageForm{
+    margin-top: 5em;
+    display: flex;
+    justify-content: center;
+}
 
 
 

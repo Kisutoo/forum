@@ -14,18 +14,25 @@
     <header>
         <nav>
             <a href="index.php">Accueil</a>
-            <a href="index.php?ctrl=topic&action=listTopics">ListTopics</a>
+            <?php if(App\Session::isAdmin())
+            { ?>
+                <a href="index.php?ctrl=topic&action=listTopics">ListTopics</a>
+            <?php } ?>
             <a href="index.php?ctrl=forum&action=listCategories">listCategories</a>
             <div>
-         <?php if(isset($_SESSION["user"]))
+         <?php if(App\Session::getUser())
                { ?>
+                <div class="navincription">
                     <a href="index.php?ctrl=security&action=profile">Mon profil</a>
                     <a href="index.php?ctrl=security&action=logout">Se déconnecter</a> 
+               </div>
          <?php } 
                 else
                 { ?>
+                <div class="navincription">
                     <a href="index.php?ctrl=security&action=loginPage">Se connecter</a>
-                    <a href="index.php?ctrl=security&action=registerPage">S'inscrire</a> 
+                    <a href="index.php?ctrl=security&action=registerPage">S'inscrire</a>
+                </div>
          <?php  } ?>
 
             </div>

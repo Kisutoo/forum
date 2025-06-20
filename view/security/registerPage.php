@@ -1,18 +1,25 @@
 <div class="contentForm">
     <form class="registerForm" action="index.php?ctrl=security&action=register" method="POST">
-        <label for="pseudo" aria-label="Pseudo">Pseudo</label>
-        <input class="inputForm" type="text" required="required" name="pseudo">
+        <div class="section">
+            <label for="pseudo" aria-label="Pseudo">Pseudo</label>
+            <input class="inputForm" type="text" required="required" name="pseudo" placeholder="exemple">
+        </div>
+
+        <div class="section">
+            <label for="mail" aria-label="Adresse Email">Mail</label>
+            <input class="inputForm" type="text" required="required" name="mail" placeholder="exemple@hotmail.com">
+        </div>
         
+        <div class="section">
+            <label for="password" aria-label="Mot de passe">Mot de passe<br>(8 caractères minimum, 1 numéro, 1 majuscule, 1 minuscule, 1 caractère spécial)</label>
+            <input class="inputForm" type="password" required="required" name="password1" placeholder="********">
+        </div>
         
-        <label for="mail" aria-label="Adresse Email">Mail</label>
-        <input class="inputForm" type="text" required="required" name="mail">
-
-        <label for="password" aria-label="Mot de passe">Mot de passe<br>(8 caractères minimum, 1 numéro, 1 majuscule, 1 minuscule, 1 caractère spécial)</label>
-        <input class="inputForm" type="text" required="required" name="password1">
-
-        <label for="passwordConfirm" aria-label="Adresse Email">Confirmation du mot de passe</label>
-        <input class="inputForm" type="text" required="required" name="password2">
-
-        <input type="submit" name="submit" value="S'inscrire">
+        <div class="section">
+            <label for="passwordConfirm" aria-label="Adresse Email">Confirmation du mot de passe</label>
+            <input class="inputForm" type="password" required="required" name="password2" placeholder="********">
+        </div>
+        
+        <input class="envoyer" type="submit" name="submit" value="S'inscrire">
     </form>
 </div>

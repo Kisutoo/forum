@@ -10,12 +10,20 @@ use Model\Managers\PostManager;
 
 class HomeController extends AbstractController implements ControllerInterface {
 
-    public function index(){
+    public function index()
+    {
+        $userManager = new UserManager();
+
+        $user = $userManager->findAll([]);
+
         return [
             "view" => VIEW_DIR."home.php",
             "titre" => "Accueil",
             "titre_secondaire" => "BIENVENUE SUR LE FORUM",
-            "meta_description" => "Page d'accueil du forum"
+            "meta_description" => "Page d'accueil du forum",
+            "data" => [
+                "user" => $user
+            ]
         ];
     }
         

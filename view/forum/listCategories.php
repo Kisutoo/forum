@@ -1,9 +1,12 @@
 <?php
     $categories = $result["data"]["categories"]; 
 ?>
+<?php if(App\Session::isAdmin())
+{ ?>
 <div class="topics addCategorie">
     <a class="" href="index.php?ctrl=forum&action=addCategorieForm">Ajouter une catégorie</a>
 </div>
+<?php } ?>
 <div class="topics categories">
 <?php 
 foreach($categories as $categorie ){ ?>
