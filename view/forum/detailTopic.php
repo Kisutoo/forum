@@ -2,18 +2,22 @@
     $topic = $result["data"]["topic"];
     $posts = $result["data"]["posts"];
 ?>
-<?php if(App\Session::isAdmin() || $topic->getUser()->getId() == $_SESSION["user"]->getId())
-{ ?>
-    <div class="cadenas">
-        <?php if($topic->getClosed() == 0)
-            { ?>
-            <a href="index.php?ctrl=topic&action=closeTopic&id=<?= $topic->getId() ?>"><img class="cadenasimg" src="./public/img/deverrouillage-par-cadenas.png" alt="Image de cadena ouvert"></a>
+
+<?php if(isset($_SESSION["user"]))
+{
+    if(App\Session::isAdmin() || $topic->getUser()->getId() == $_SESSION["user"]->getId())
+    { ?>
+        <div class="cadenas">
+            <?php if($topic->getClosed() == 0)
+                { ?>
+                <a href="index.php?ctrl=topic&action=closeTopic&id=<?= $topic->getId() ?>"><img class="cadenasimg" src="./public/img/deverrouillage-par-cadenas.png" alt="Image de cadena ouvert"></a>
+                <?php } ?>
+                <?php if($topic->getClosed() == 1)
+                { ?>
+                    <a href="index.php?ctrl=topic&action=openTopic&id=<?= $topic->getId() ?>"><img class="cadenasimg" src="./public/img/cadenas.png" alt="Image de cadena fermé"></a>
             <?php } ?>
-            <?php if($topic->getClosed() == 1)
-            { ?>
-                <a href="index.php?ctrl=topic&action=openTopic&id=<?= $topic->getId() ?>"><img class="cadenasimg" src="./public/img/cadenas.png" alt="Image de cadena fermé"></a>
-        <?php } ?>
-    </div>
+        </div>
+    <?php } ?>
 <?php } ?>
 
 <div class="allPostsContentContent">
@@ -30,10 +34,18 @@
                     </div>
             </div>
             <div></div><p class="post"><?= $post->getTexte() ?></p>
-                    <?php if(App\Session::isAdmin() || $post->getUser()->getId() == $_SESSION["user"]->getId())
-                    { ?>
-                        <a href="index.php?ctrl=post&action=deletePost&id=<?= $post->getId() ?>&topicId=<?=$topic->getId()?>"><img class="supr" src="./public/img/icons8-supprimer.svg" alt="Icone de poubelle"></a>
-                   <?php }?>
+                    <?php if(isset($_SESSION["user"]))
+                    {  
+                        if(App\Session::isAdmin() || $post->getUser()->getId() == $_SESSION["user"]->getId())
+                        { ?>
+                            <a href="index.php?ctrl=post&action=deletePost&id=<?= $post->getId() ?>&topicId=<?=$topic->getId()?>"><img class="supr" src="./public/img/icons8-supprimer.svg" alt="Icone de poubelle"></a>
+                    <?php }
+                        if(App\Session::isAdmin() || $post->getUser()->getId() != $_SESSION["user"]->getId())
+                        { ?>
+
+                            <a href="index.php?ctrl=admin&action=warnMessage&id=<?= $post->getId() ?>"><img class="pointdex"src="./public/img/point-dexclamation.png" alt="Point d'exclamation"></a>
+                  <?php } ?>
+                <?php } ?>
         <?php } 
         }?>
     </div>

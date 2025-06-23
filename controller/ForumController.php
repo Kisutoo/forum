@@ -8,6 +8,7 @@ use Model\Managers\CategorieManager;
 use Model\Managers\TopicManager;
 use Model\Managers\UserManager;
 use Model\Managers\PostManager;
+use Model\Managers\WarnManager;
 
 class ForumController extends AbstractController implements ControllerInterface{
 

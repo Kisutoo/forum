@@ -7,6 +7,7 @@ use App\ControllerInterface;
 use Model\Managers\UserManager;
 use Model\Managers\TopicManager;
 use Model\Managers\PostManager;
+use Model\Managers\WarnManager;
 
 class HomeController extends AbstractController implements ControllerInterface {
 
