@@ -37,7 +37,6 @@ class ForumController extends AbstractController implements ControllerInterface{
     }
 
     public function addCategorieForm() {
-        $this->restrictTo("membre");
         return [
             "view" => VIEW_DIR . "forum/addCategorieForm.php",
             "meta_description" => "Page pour ajouter une catégorie au forum",

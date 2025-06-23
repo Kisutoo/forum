@@ -68,7 +68,11 @@ final class Post extends Entity{
     }
 
     public function setCreationDate($creationDate) {
-        $this->creationDate = $creationDate;
+        
+        $unixTime = strtotime($creationDate);
+        $newDate = date("d/m/Y à H:i", $unixTime);
+
+        $this->creationDate = $newDate;
         return $this;
     }
 
@@ -84,4 +88,5 @@ final class Post extends Entity{
     public function __toString() {
         return $this->texte;
     }
+
 }

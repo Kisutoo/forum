@@ -1,5 +1,5 @@
 <div class="contentForm">
-    <form class="registerForm" action="index.php?ctrl=security&action=login" method="POST">
+    <form class="form" action="index.php?ctrl=security&action=login" method="POST">
         <div class="section">
             <label for="mail" aria-label="Adresse mail">Mail</label>
             <input class="inputForm" type="text" required="required" name="mail" placeholder="exemple@hotmail.com">

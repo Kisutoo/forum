@@ -1,5 +1,5 @@
 <div class="contentForm">
-    <form class="registerForm" action="index.php?ctrl=security&action=register" method="POST">
+    <form class="form" action="index.php?ctrl=security&action=register" method="POST">
         <div class="section">
             <label for="pseudo" aria-label="Pseudo">Pseudo</label>
             <input class="inputForm" type="text" required="required" name="pseudo" placeholder="exemple">

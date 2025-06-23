@@ -13,11 +13,12 @@
 <body>
     <header>
         <nav>
-            <a href="index.php">Accueil</a>
+            <a class="accueil" href="index.php">Accueil</a>
             <?php if(App\Session::isAdmin())
+            // Si l'utilisateur à la role admin, on appelle directement la fonction en passant par le fichier ou elle se trouve
             { ?>
                 <a href="index.php?ctrl=topic&action=listTopics">ListTopics</a>
-            <?php } ?>
+            <?php } // Seul les admins voient ce lien ?>
             <a href="index.php?ctrl=forum&action=listCategories">listCategories</a>
             <div>
          <?php if(App\Session::getUser())
@@ -39,13 +40,10 @@
         </nav>
     </header>
     <main>
+        <h3 class="infomessage" style="color: red"><?= App\Session::getFlash("error") ?></h3>
+        <h3 class="infomessage" style="color: green"><?= App\Session::getFlash("success") ?></h3>
         <h1><?= $titre_secondaire ?></h1>
-        <?php if(isset($_SESSION["error"]))
-        { ?>
-            <h2 class="error"><?= $_SESSION["error"] ?></h2>
-            <?php unset($_SESSION["error"]);
-        } ?>
-        <?= $page ?>
+        <?= $page // Réceptionne les messages que l'on veut faire passer à l'utilisateur,  que l'on ajoutera via la fonction addFlash ?>
     </main>
     <footer>
 

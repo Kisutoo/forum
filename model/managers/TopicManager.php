@@ -27,4 +27,17 @@ class TopicManager extends Manager{
             $this->className
         );
     }
+
+    public function changeStateClosed($closed, $topicId)
+    {
+
+        $sql = "UPDATE " .$this->tableName.
+                " SET closed = :closed
+                WHERE id_topic = :id";
+                
+        return $this->getOneOrNullResult(
+            DAO::select($sql, ['id' => $topicId, "closed" => $closed], false), 
+            $this->className
+        );
+    }
 }

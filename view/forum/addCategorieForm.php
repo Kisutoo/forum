@@ -1,5 +1,5 @@
 <div>
-    <form action="index.php?ctrl=forum&action=addCategorie" method="POST">
+    <form class="form" action="index.php?ctrl=forum&action=addCategorie" method="POST">
     <div class="section">
         <label class="labelCategorie" aria-label="Nom de la catégorie souhaité">
             Nom de la catégorie

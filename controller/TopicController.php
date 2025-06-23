@@ -92,17 +92,21 @@ class TopicController extends AbstractController implements ControllerInterface{
     }
 
     public function addTopic($id) {
-        $this->restrictTo("membre");
+        
         if(isset($_POST['submit']))
         {
             $title = filter_input(INPUT_POST, "title", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-            // $userId = filter_input(INPUT_POST, "user_id", FILTER_VALIDATE_INT);
 
             $topicManager = new TopicManager();
 
+            if(isset($_SESSION["user"]))
+            {
+                $user = $_SESSION["user"];
+                $userId = $user->getId();
+            }
             $topicArray = array (
                 "title" => $title,
-                "user_id" => 1,
+                "user_id" => $userId,
                 "categorie_id" => $id
             );
             $topics = $topicManager->add($topicArray);
@@ -114,18 +118,32 @@ class TopicController extends AbstractController implements ControllerInterface{
     public function deleteTopic($id) {
         $topicManager = new TopicManager();
         $topicController = new topicController();
+        $idCategorie = $_GET["idCategorie"];
 
         $topic = $topicManager->delete($id);
-        $redirect = $topicController->redirectTo("topic", "listTopicByCategorie", "");
+        $redirect = $topicController->redirectTo("topic", "listTopicsByCategorie", $idCategorie);
     }
 
-    public function addMessage()
+    public function openTopic($id)
     {
-        if(isset($_POST["submit"]))
-        {
-            $texte = filter_input(INPUT_POST, "texte", FILTER_VALIDATE_FULL_SPECIAL_CHARS);
+        $session = new Session();
+        $topicManager = new TopicManager();
 
-        }
+        $topicManager->changeStateClosed(0, $id);
+        $session->addFlash("sucess", "Topic ouvert avec succès !");
+        $this->redirectTo("topic", "detailTopic", $id);
     }
+
+    public function closeTopic($id)
+    {
+        $session = new Session();
+        $topicManager = new TopicManager();
+
+        $topicManager->changeStateClosed(1, $id);
+        $session->addFlash("sucess", "Topic clos avec succès !");
+        $this->redirectTo("topic", "detailTopic", $id);
+    }
+
+    
 }
 ?>

@@ -3,7 +3,7 @@ $users = $result["data"]["users"];
 ?>
 
 <div>
-    <form action="index.php?ctrl=topic&action=addTopic&id=<?=$_GET['id']?>" method="post">
+    <form class="form" action="index.php?ctrl=topic&action=addTopic&id=<?=$_GET['id']?>" method="post">
     <div class="section">
         <label class="labelCategorie" aria-label="Nom du topic souhaité">
             Titre du topic
