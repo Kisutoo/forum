@@ -11,11 +11,11 @@
      foreach($topics as $topic){ ?>
      <!-- On va afficher ici tous les topics contenus dans une catégorie -->
             <div>
-                <a href="index.php?ctrl=topic&action=detailTopic&id=<?=$topic->getId()?>">
+                <a class="lienTopic" href="index.php?ctrl=topic&action=detailTopic&id=<?=$topic->getId()?>">
                 <!-- Affichage d'un bouton qui redirige à l'interieur d'un topic -->
                     <b class="topicName"><?= $topic ?></b>
                     <!-- Nom du topic -->
-                    <small class="topicCreator"> by <?= $topic->getUser()->getNickName() ?></small>
+                    <small class="topicCreator">by <?= $topic->getUser()->getNickName() ?></small>
                     <!-- Créateur du topic -->
                 </a>
             </div>
