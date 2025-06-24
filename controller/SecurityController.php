@@ -14,6 +14,7 @@ class SecurityController extends AbstractController{
     // contiendra les méthodes liées à l'authentification : register, login et logout
 
     public function registerPage()
+    // Redirection vers le formulaire d'inscription
     {
         return [
             "meta_description" => "Page d'inscription du forum",
@@ -107,6 +108,7 @@ class SecurityController extends AbstractController{
     }
     
     public function loginPage()
+    // Redirection vers le formulaire de connexion
     {
         return [
             "meta_description" => "Page de connexion du forum",
@@ -129,6 +131,7 @@ class SecurityController extends AbstractController{
             if($mail && $password)
             {
                 $user = $userManager->checkUserByMail($mail);
+                $userCheck = $userManager;
                 // Si l'utilisateur existe en base de donné (vérification via le mail)
                 if($user)
                 // Si l'utilisateur existe
@@ -138,9 +141,18 @@ class SecurityController extends AbstractController{
                     if(password_verify($password, $hash) == true)
                     // Si le mot de passe rentré en formulaire, correspond au mot de passe haché de la base de donné (vérification faire grace à password_verify)
                     {
-                        $session->setUser($user);
-                        // On rentre l'utilisateur dans le tableau de session avec ses information (pseudo, mail, photo de profil etc)
-                        $this->redirectTo("home", "index");
+                        if($userCheck->checkIfBannedByMail($mail) === 1)
+                        // On vérifié via la fonction CheckIfBannedByMail et le mail fourni si l'utilisateur doit être considéré comme banni en base de donnée
+                        {
+                            $session->addFlash("error", "Votre compte a été suspendu.");
+                            $this->redirectTo("security", "loginPage"); exit;
+                        }
+                        else
+                        {
+                            $session->setUser($user);
+                            // On rentre l'utilisateur dans le tableau de session avec ses information (pseudo, mail, photo de profil etc)
+                            $this->redirectTo("home", "index"); exit;
+                        }
                     }
                     else
                     {
@@ -160,11 +172,13 @@ class SecurityController extends AbstractController{
             {
                 $session->addFlash("error", "Veuillez saisir des information correctes");
                 $this->redirectTo("security", "loginPage"); exit;
+                //Message d'erreur + redirection les données saisies ne passent pas les filter input 
             }
         }
         else
         {
             $this->redirectTo("security", "loginPage"); exit;
+            // redirection dans le cas ou on accède à cette fonction sans valider les champs rentrés ou sans appuyer sur submit dans le formulaire de connexion
         }
     }
     
@@ -175,9 +189,39 @@ class SecurityController extends AbstractController{
         $this->redirectTo("home", "index"); exit;
         // Redirection vers la page d'accueil
     }
-}
 
-// définir hasher, et la différence entre hasher, encoder et chiffrer + cas d'utilisation
+    public function profilePage($id)
+    // Fonction qui redirige vers la page de profil de l'utilisateur
+    {
+        $userManager = new UserManager();
+
+        $users = $userManager->findOneById($id);
+        // On récupère les informations de l'utilisateur
+
+        return [
+            "meta_description" => "Page de profil d'un utilisateur",
+            "titre" => "Mon profil",
+            "titre_secondaire" => "Mon profil",
+            "view" => VIEW_DIR."security/profilePage.php",
+            "data" => [
+                "users" => $users
+            ]
+        ];
+    }
+
+    public function deleteProfile($id)
+    // Fonction utilisée dans le but de supprimer un profil
+    {
+        $userManager = new UserManager();
+        $session = new Session();
+
+        $userManager->delete($id);
+
+        $session->addFlash("success", "Le profile a bien été supprimé !");
+        $this->logout();
+        $this->redirectTo("home", "index"); exit;
+    }
+}
 
     // Hasher : Sens unique/irreversible ,  consiste à convertir les mots de passe en une chaîne alphanumérique à l’aide d’algorithmes (ne pas stocker les information sensibles en clair dans la base de donnée, dans le cas ou l'on venait à se la faire pirater ou si celle ci fuitait)
     // Chiffrer : Double sens/reversible ,  Converti également les mots de passe en chaine alphanumérique mais peu être retransformer en texte clair si on possède la clef de chiffrement (empecher le vol de données, la modification de celles ci ou empecher tout accès non autorisé si l'on possède pas la clef de chiffrement)

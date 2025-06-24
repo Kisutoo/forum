@@ -16,6 +16,7 @@ final class User extends Entity{
     private $dateDInscription;
     private $photoDeProfil;
     private $role;
+    private $isBanned;
 
     public function __construct($data){         
         $this->hydrate($data);        
@@ -57,7 +58,7 @@ final class User extends Entity{
     }
 
     public function __toString() {
-        return $this->nickName;
+        return $this->id;
     }
 
     public function getMail()
@@ -113,6 +114,17 @@ final class User extends Entity{
     {
         $this->role = $role;
         return $this->role;
+    }
+
+    public function setIsBanned($isBanned)
+    {
+        $this->isBanned = $isBanned;
+        return $this;
+    }
+
+    public function getIsBanned()
+    {
+        return $this->isBanned;
     }
 
 }

@@ -14,6 +14,7 @@ class TopicController extends AbstractController implements ControllerInterface{
     
     public function listTopics() {
 
+        $this->restrictTo("admin");
         $topicManager = new TopicManager();
         $userManager = new UserManager();
 

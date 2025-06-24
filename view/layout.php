@@ -13,7 +13,15 @@
 <body>
     <header>
         <nav>
-            <a class="accueil" href="index.php">Accueil</a>
+            <div>
+                <a class="accueil" href="index.php">Accueil</a>
+              <?php if(App\Session::isAdmin())
+              // Si l'utilisateur connecté possède le role administrateur
+              { ?>
+                <a href="index.php?ctrl=admin&action=adminPage">Admin</a>
+                <!-- Lien vers un Pannel Administrateur ou l'on peut modérer les utilisateurs -->
+            <?php  } ?>
+            </div>
             <?php if(App\Session::isAdmin())
             // Si l'utilisateur à la role admin, on appelle directement la fonction en passant par le fichier ou elle se trouve
             { ?>
@@ -22,17 +30,21 @@
             <a href="index.php?ctrl=forum&action=listCategories">listCategories</a>
             <div>
          <?php if(App\Session::getUser())
+         // Si le tableau de SESSION n'est pas vide, donc si un utilisateur est connecté au forum
                { ?>
                 <div class="navincription">
-                    <a href="index.php?ctrl=security&action=profile">Mon profil</a>
+                    <a href="index.php?ctrl=security&action=profilePage&id=<?= $_SESSION["user"] ?>">Mon profil</a>
                     <a href="index.php?ctrl=security&action=logout">Se déconnecter</a> 
+                    <!-- Affichage des boutons Mon profil et Se déconnecter de la barre de navigation -->
                </div>
          <?php } 
                 else
+                // Si personne n'est connecté au forum
                 { ?>
                 <div class="navincription">
                     <a href="index.php?ctrl=security&action=loginPage">Se connecter</a>
                     <a href="index.php?ctrl=security&action=registerPage">S'inscrire</a>
+                    <!-- Affichage des boutons se connecter et s'inscrire de la barre de navigation -->
                 </div>
          <?php  } ?>
 

@@ -12,10 +12,11 @@ use Model\Managers\WarnManager;
 class HomeController extends AbstractController implements ControllerInterface {
 
     public function index()
+    // redirection vers la page d'accueil du forum
     {
         $userManager = new UserManager();
 
-        $user = $userManager->findAll([]);
+        $user = $userManager->findAll();
 
         return [
             "view" => VIEW_DIR."home.php",
@@ -24,21 +25,6 @@ class HomeController extends AbstractController implements ControllerInterface {
             "meta_description" => "Page d'accueil du forum",
             "data" => [
                 "user" => $user
-            ]
-        ];
-    }
-        
-    public function users(){
-        $this->restrictTo("ROLE_USER");
-
-        $manager = new UserManager();
-        $users = $manager->findAll(['register_date', 'DESC']);
-
-        return [
-            "view" => VIEW_DIR."security/users.php",
-            "meta_description" => "Liste des utilisateurs du forum",
-            "data" => [ 
-                "users" => $users 
             ]
         ];
     }

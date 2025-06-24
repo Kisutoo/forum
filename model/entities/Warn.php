@@ -25,7 +25,7 @@ final class Warn extends Entity{
 
     public function getPost()
     {
-        return $this;
+        return $this->post;
     }
 
     public function setUser($user)
@@ -36,13 +36,18 @@ final class Warn extends Entity{
 
     public function getUser()
     {
-        return $this;
+        return $this->user;
     }
 
     public function setWarnDate($warnDate)
     {
         $this->warnDate = $warnDate;
         return $this;
+    }
+
+    public function getWarnDate()
+    {
+        return $this->warnDate;
     }
 
     public function __toString()

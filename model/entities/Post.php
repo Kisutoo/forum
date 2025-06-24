@@ -13,7 +13,7 @@ final class Post extends Entity{
     private $texte;
     private $creationDate;
     private $user;
-    private $categorie;
+    private $topic;
 
     public function __construct($data){         
         $this->hydrate($data);        
@@ -68,20 +68,23 @@ final class Post extends Entity{
     }
 
     public function setCreationDate($creationDate) {
+        // Modification de l'affichage de la date de création du post
         
         $unixTime = strtotime($creationDate);
+        // On transforme l'objet date en chaine de caractères
         $newDate = date("d/m/Y à H:i", $unixTime);
+        // Puis on va faire passer cette chaine de caratères dans un moule "d/m/Y à H:i" (jour/mois/année à Heure:Minutes)
 
         $this->creationDate = $newDate;
         return $this;
     }
 
-    public function getCategorie(){
-        return $this->categorie;
+    public function getTopic(){
+        return $this->topic;
     }
 
-    public function setCategorie($categorie){
-        $this->categorie = $categorie;
+    public function setTopic($topic){
+        $this->topic = $topic;
         return $this;
     }
 

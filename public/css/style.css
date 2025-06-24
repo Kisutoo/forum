@@ -60,7 +60,44 @@ h1{
         background-color: rgba(87, 17, 75, 0.3);
     }
 }
+.user{
+    display: flex;
+    gap: 1em;
+}
 
+.warnedMessage{
+    display: flex;
+    p{
+        width: 90%;
+    }
+}
+
+.adminSection1
+{
+    margin: 5em 5em;
+    display: flex;
+    h3{
+        margin-bottom: 2em;
+        font-size: 2em;
+    }
+}
+
+.listeUtilisateursBannis{
+    width: 50%;
+}
+
+.listWarnedMessages{
+    width: 50%;
+    p{
+        overflow-wrap: anywhere;
+    }
+}
+
+.listUsers, .listBannedUsers{
+    display: grid;
+    gap: 1.5em;
+    grid-template-columns: repeat(3, 20em);
+}
 .addCategorie{
     display: flex;
 }
@@ -95,7 +132,7 @@ h1{
 }
 
 .accueil{
-    margin-right: 3em;
+    margin-right: 0.5em;
 }
 
 .allPosts{
@@ -170,7 +207,7 @@ h1{
     justify-content: center;
 }
 
-.form{
+.form, .formTopic{
     font-size: 1.5em;
     margin: 0 10em;
     display: flex;
@@ -210,7 +247,40 @@ h1{
 }
 
 .pointdex{
-    
+    margin-top: 0.1em;
+    width: 2%;
+}
+
+.messagetxt{
+    display: flex;
+    flex-direction: column;
+}
+
+.actionAdmin{
+    text-align: center;
+}
+
+textarea{
+    padding: 1em;
+    border-radius: 20px;
 }
 
 
+@media screen and (max-width: 900px){
+
+    .topics{
+        grid-template-columns: repeat(2, 40em);
+        text-align: center;
+        font-size: 0.5em;
+        .topicName{
+            font-size: 1em;
+            font-weight: bold;
+        }
+    }
+
+    .formTopic{
+        margin-top: 2em;
+        text-align: center;
+    }
+    
+}

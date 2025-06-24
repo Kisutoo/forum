@@ -11,7 +11,7 @@
         </div>
         
         <div class="section">
-            <label for="password" aria-label="Mot de passe"><p>Mot de passe</p><p>(8 caractères minimum, 1 numéro, 1 majuscule, 1 minuscule, 1 caractère spécial)</label>
+            <label for="password" aria-label="Mot de passe"><p>Mot de passe</p><p>(8 caractères minimum, 1 numéro, 1 majuscule, 1 minuscule, 1 caractère spécial)<br></label>
             <input class="inputForm" type="password" required="required" name="password1" placeholder="********">
         </div>
         
@@ -23,3 +23,5 @@
         <input class="envoyer" type="submit" name="submit" value="S'inscrire">
     </form>
 </div>
+
+<!-- Formulaire pour pouvoir s'inscrire au forum -->

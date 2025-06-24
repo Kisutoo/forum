@@ -11,3 +11,5 @@
     </div>
     </form>
 </div>
+
+<!-- Formulaire pour ajouter une catégorie au forum -->

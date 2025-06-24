@@ -29,6 +29,7 @@ class TopicManager extends Manager{
     }
 
     public function changeStateClosed($closed, $topicId)
+    // Change l'état d'un topic d'ouvert à fermé et inversement
     {
 
         $sql = "UPDATE " .$this->tableName.
