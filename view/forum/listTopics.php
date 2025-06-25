@@ -6,7 +6,8 @@
 <div class="topics">
    <?php if($topics)
    {
-     foreach($topics as $topic){ ?>
+     foreach($topics as $topic)
+      { ?>
      <!-- On va afficher ici tous les topics contenus dans une catégorie -->
             <div>
                 <a class="lienTopic" href="index.php?ctrl=topic&action=detailTopic&id=<?=$topic->getId()?>">
@@ -17,6 +18,6 @@
                     <!-- Créateur du topic -->
                 </a>
             </div>
-    <?php } 
+<?php } 
     }?>
 </div>

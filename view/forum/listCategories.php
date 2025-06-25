@@ -11,11 +11,12 @@
 <?php } ?>
 <div class="topics categories">
 <?php 
-foreach($categories as $categorie ){ ?>
-<!-- Affichage des catégories -->
-    <p><a href="index.php?ctrl=topic&action=listTopicsByCategorie&id=<?= $categorie->getId() ?>"><?= $categorie->getNomCategorie() ?></a></p>
-    <!-- On affiche des boutons contenant le nom d'une catégories et leur Id correspondant (invisible) -->
+foreach($categories as $categorie )
+// Affichage des catégories
+{ ?>
+    <p class="boutonCategorie"><a href="index.php?ctrl=topic&action=listTopicsByCategorie&id=<?= $categorie->getId() ?>"><?= $categorie->getNomCategorie() ?></a></p>
 <?php } ?>
+    <!-- On affiche des boutons contenant le nom d'une catégories et leur Id correspondant (invisible) -->
 </div>
 
 
